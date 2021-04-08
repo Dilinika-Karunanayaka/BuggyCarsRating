@@ -13,6 +13,7 @@
         <cucumber.version>6.8.1</cucumber.version>
         <junit.version>4.13</junit.version>
         <masterthought.version>2.8.0</masterthought.version>
+        <maven-surefire.version>2.22.0</maven-surefire.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
@@ -76,6 +77,18 @@
                     <target>1.8</target>
                 </configuration>
             </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>${maven-surefire.version}</version>
+                <configuration>
+                    <testFailureIgnore>true</testFailureIgnore>
+                    <parallel>methods</parallel>
+                    <threadCount>1</threadCount>
+                </configuration>
+            </plugin>
+
             <plugin>
                 <groupId>net.masterthought</groupId>
                 <artifactId>maven-cucumber-reporting</artifactId>

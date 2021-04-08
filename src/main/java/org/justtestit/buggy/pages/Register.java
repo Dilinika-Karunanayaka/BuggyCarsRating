@@ -39,10 +39,13 @@ public class Register extends Base {
         super(driver);
     }
 
-    public void registerANewUser(String login, String firstName, String lastName, String password) {
+    public String registerANewUser(String login, String firstName, String lastName, String password) {
+        String dateTime = "";
         if(login.endsWith("-RANDOM")){
-            String dateTime = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyMMddHHmmss"));
+            dateTime = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyMMddHHmmssSS"));
             login = login.replace("RANDOM", dateTime);
+            firstName = firstName + dateTime;
+            lastName = lastName + dateTime;
         }
         log.info("Login:" + login);
         this.userName.sendKeys(login);
@@ -51,10 +54,12 @@ public class Register extends Base {
         this.password.sendKeys(password);
         this.confirmPassword.sendKeys(password);
         register.click();
+
+        return dateTime;
     }
 
     public String getSuccessMessage() {
-        return successMessage.getText();
+        return waitUntilVisibilityOf(successMessage).getText();
     }
 
     public String getErrorMessage() {

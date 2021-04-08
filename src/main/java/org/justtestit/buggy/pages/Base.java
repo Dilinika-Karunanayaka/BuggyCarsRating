@@ -1,6 +1,7 @@
 package org.justtestit.buggy.pages;
 
 import lombok.extern.log4j.Log4j2;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
@@ -53,6 +54,15 @@ public class Base {
     public void mouseover(WebElement webElement) {
         Actions action = new Actions(driver);
         action.moveToElement(webElement).build().perform();
+    }
+
+    public String preLogin() {
+        new Home(driver).clickRegister();
+        String dateTime = new Register(driver).registerANewUser("BCR-RANDOM", "fn", "ln", "BCR123^bcr");
+        driver.navigate().back();
+        waitUntilVisibilityOf(driver.findElement(By.xpath("//a[@href='/overall']")));
+        new Home(driver).login("BCR-" + dateTime, "BCR123^bcr");
+        return dateTime;
     }
 
 }

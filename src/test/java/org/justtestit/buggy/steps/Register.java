@@ -3,10 +3,12 @@ package org.justtestit.buggy.steps;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import lombok.extern.log4j.Log4j2;
 import org.justtestit.buggy.Web;
 
 import static org.junit.Assert.assertEquals;
 
+@Log4j2
 public class Register {
 
     final Web web;
@@ -20,8 +22,8 @@ public class Register {
         web.home.clickRegister();
     }
 
-    @When("I add Login {string}, First Name {string}, Last Name {string}, Password {string}")
-    public void i_add_login_first_name_last_name_password(String login, String firstName, String lastName, String password) {
+    @When("I submit Login {string}, First Name {string}, Last Name {string}, Password {string}")
+    public void i_submit_login_first_name_last_name_password(String login, String firstName, String lastName, String password) {
         web.register.registerANewUser(login, firstName, lastName, password);
     }
 

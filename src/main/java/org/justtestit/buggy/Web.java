@@ -2,8 +2,7 @@ package org.justtestit.buggy;
 
 import lombok.extern.log4j.Log4j2;
 import org.apache.logging.log4j.ThreadContext;
-import org.justtestit.buggy.pages.Home;
-import org.justtestit.buggy.pages.Register;
+import org.justtestit.buggy.pages.*;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -15,6 +14,10 @@ public class Web {
 
     public Home home;
     public Register register;
+    public OverallRating overallRating;
+    public Make make;
+    public Model model;
+    public Profile profile;
 
     public Web() {
         ThreadContext.put("loggerId", "main");
@@ -26,6 +29,10 @@ public class Web {
         log.info("Initializing page objects...");
         home = new Home(driver);
         register = new Register(driver);
+        overallRating = new OverallRating(driver);
+        make = new Make(driver);
+        model = new Model(driver);
+        profile = new Profile(driver);
         log.info(String.format("Thread-%s %s", Thread.currentThread().getId(), "Pages Initialized"));
     }
 
