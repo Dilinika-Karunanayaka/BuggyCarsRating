@@ -60,7 +60,13 @@ public class Base {
         new Home(driver).clickRegister();
         String dateTime = new Register(driver).registerANewUser("BCR-RANDOM", "fn", "ln", "BCR123^bcr");
         driver.navigate().back();
-        waitUntilVisibilityOf(driver.findElement(By.xpath("//a[@href='/overall']")));
+        //Temporary fix to site slowness 
+        try {
+            sleep(30000);
+        } catch (InterruptedException e) {
+            log.error(e);
+        }
+        //waitUntilVisibilityOf(driver.findElement(By.xpath("//a[@href='/overall']")));
         new Home(driver).login("BCR-" + dateTime, "BCR123^bcr");
         return dateTime;
     }
